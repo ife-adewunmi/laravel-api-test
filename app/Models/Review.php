@@ -16,6 +16,10 @@ class Review extends Model
         'title', 'description', 'rating', 'author',
     ];
 
+    public $casts = [
+        'rating' => 'float',
+    ];
+
     public function hotel(): BelongsTo
     {
         return $this->belongsTo(Hotel::class);
