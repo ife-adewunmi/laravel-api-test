@@ -14,7 +14,7 @@ class ReviewFactory extends Factory
         return [
             'title' => $this->faker->text(50),
             'description' => $this->faker->text(), 
-            'rating' => random_int(1, 50),
+            'rating' => random_int(1, 5),
             'author' => $this->faker->name,
         ];
     }
