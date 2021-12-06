@@ -61,4 +61,21 @@ class HotelTest extends TestCase
         $this->getJson(route('api.hotels.find', ['id' => $hotel->id]))
             ->assertNotFound();
     }
+
+    public function test_hotel_rating_matches_with_reviews() {
+        $hotel = Hotel::factory()
+            ->hasReviews(5)
+            ->create();
+        
+        $average_rating = $hotel->reviews()->avg('rating');
+        $average_rating = round($average_rating, 1);
+
+        $this->getJson(route('api.hotels.find', ['id' => $hotel->id]))
+            ->assertOk()
+            ->assertJson([
+                'hotel' => [
+                    'rating' => $average_rating,
+                ],
+            ]);
+    }
 }
